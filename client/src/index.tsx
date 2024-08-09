@@ -14,7 +14,8 @@ import ru from 'javascript-time-ago/locale/ru'
 TimeAgo.addDefaultLocale(en)
 TimeAgo.addLocale(ru)
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+
 root.render(
 	<React.StrictMode>
 		<Provider store={store}>

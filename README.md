@@ -1,5 +1,6 @@
 This project contains the following technologies:
 - React 18
+- TypeScript
 - React Router 6 (navigation)
 - Redux Toolkit (data storage)
 - Redux Persist (autosave to local storage)

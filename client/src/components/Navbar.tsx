@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -37,7 +37,7 @@ const Search = styled.div`
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
-	color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.text};
 `;
 
 const Input = styled.input`
@@ -75,45 +75,40 @@ const Avatar = styled.img`
   background-color: #999;
 `;
 
-const Navbar = () => {
-	const navigate = useNavigate()
-	const [open, setOpen] = useState(false);
-	const [q, setQ] = useState("");
-	const { currentUser } = useSelector((state) => state.user);
+const Navbar: FC = () => {
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [q, setQ] = useState("");
+  const { currentUser } = useSelector((state) => state.user);
 
-	return (
-		<>
-			<Container>
-				<Wrapper>
+  return (
+    <>
+      <Container>
+        <Wrapper>
+          <Search>
+            <Input placeholder="Search" onChange={(e) => setQ(e.target.value)} />
+            <SearchOutlinedIcon onClick={() => navigate(`/search?q=${q}`)} />
+          </Search>
 
-					<Search>
-						<Input
-							placeholder="Search"
-							onChange={(e) => setQ(e.target.value)}
-						/>
-						<SearchOutlinedIcon onClick={() => navigate(`/search?q=${q}`)} />
-					</Search>
-
-					{currentUser ? (
-						<User>
-							<VideoCallOutlinedIcon onClick={() => setOpen(true)} />
-							<Avatar src={currentUser.img} />
-							{currentUser.name}
-						</User>
-					) : (
-						<Link to="signin" style={{ textDecoration: "none" }}>
-							<Button>
-								<AccountCircleOutlinedIcon />
-								SIGN IN
-							</Button>
-						</Link>
-					)}
-
-				</Wrapper>
-			</Container>
-			{open && <Upload setOpen={setOpen} />}
-		</>
-	);
+          {currentUser ? (
+            <User>
+              <VideoCallOutlinedIcon onClick={() => setOpen(true)} />
+              <Avatar src={currentUser.img} />
+              {currentUser.name}
+            </User>
+          ) : (
+            <Link to="signin" style={{ textDecoration: "none" }}>
+              <Button>
+                <AccountCircleOutlinedIcon />
+                SIGN IN
+              </Button>
+            </Link>
+          )}
+        </Wrapper>
+      </Container>
+      {open && <Upload setOpen={setOpen} />}
+    </>
+  );
 };
 
 export default Navbar;
