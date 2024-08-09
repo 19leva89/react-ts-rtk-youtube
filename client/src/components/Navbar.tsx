@@ -1,6 +1,8 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 import Upload from "./Upload";
 
@@ -79,7 +81,7 @@ const Navbar: FC = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state: RootState) => state.user);
 
   return (
     <>

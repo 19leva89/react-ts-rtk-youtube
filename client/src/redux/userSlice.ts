@@ -1,23 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface CurrentUser {
-  _id: string;
-  name: string;
-  email: string;
-  password: string;
-  subscribers: number;
-  subscribedUsers: string[];
-  fromGoogle: boolean;
-  createdAt: string;
-  updatedAt: string;
-  // Add other properties here if needed
-}
-
-interface UserState {
-  currentUser: CurrentUser | null;
-  loading: boolean;
-  error: boolean;
-}
+import { User, UserState } from "../types";
 
 const initialState: UserState = {
   currentUser: null,
@@ -32,7 +14,7 @@ export const userSlice = createSlice({
     loginStart: (state) => {
       state.loading = true;
     },
-    loginSuccess: (state, action: PayloadAction<CurrentUser>) => {
+    loginSuccess: (state, action: PayloadAction<User>) => {
       state.loading = false;
       state.currentUser = action.payload;
     },

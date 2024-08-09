@@ -119,7 +119,7 @@ const VideoFrame = styled.video`
 `;
 
 const Video = () => {
-	const { currentUser } = useSelector((state) => state.user);
+	const { currentUser } = useSelector((state: RootState) => state.user);
 	const { currentVideo } = useSelector((state) => state.video);
 	const dispatch = useDispatch();
 
