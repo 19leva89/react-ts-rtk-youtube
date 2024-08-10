@@ -9,11 +9,11 @@ export interface User {
   _id: string;
   name: string;
   email: string;
-  password: string;
-  img: string;
-  subscribers: number;
-  subscribedUsers: string[];
-  fromGoogle: boolean;
+  password?: string;
+  img?: string;
+  subscribers?: number;
+  subscribedUsers?: string[];
+  fromGoogle?: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -31,10 +31,10 @@ export interface Video {
   desc: string;
   imgUrl: string;
   videoUrl: string;
-  views: number;
-  tags: string[];
-  likes: string[];
-  dislikes: string[];
+  views?: number;
+  tags?: string[];
+  likes?: string[];
+  dislikes?: string[];
   createdAt: string;
   updatedAt: string;
 }
@@ -45,9 +45,11 @@ export interface VideoState {
   error: boolean;
 }
 
-export interface Channel {
-  img: string;
-  name: string;
+export interface UserChannel {
+  _id: string;
+  img?: string;
+  name?: string;
+  subscribers?: number;
 }
 
 export interface UserComment {

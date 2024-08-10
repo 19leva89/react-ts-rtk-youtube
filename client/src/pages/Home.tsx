@@ -1,36 +1,35 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { Video } from "../types";
 import styled from "styled-components";
-import Card from "./Card";
+import Card from "../components/Card";
 
 const Container = styled.div`
-  flex: 2;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 `;
 
-type Props = {
-  tags: string[];
-};
-
-const Recommendation: FC<Props> = ({ tags }) => {
+const Home = ({ type }: { type: string }) => {
   const [videos, setVideos] = useState<Video[]>([]);
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`/videos/tags?tags=${tags}`);
+      const res = await axios.get(`/videos/${type}`);
       setVideos(res.data);
     };
+
     fetchVideos();
-  }, [tags]);
+  }, [type]);
 
   return (
     <Container>
       {videos.map((video) => (
-        <Card type="sm" key={video._id} video={video} />
+        <Card key={video._id} video={video} type={type} />
       ))}
     </Container>
   );
 };
 
-export default Recommendation;
+export default Home;

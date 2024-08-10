@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import axios from "axios";
 
-import { Channel, UserComment } from "../types";
+import { UserChannel, UserComment } from "../types";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -44,7 +44,7 @@ type Props = {
 };
 
 const Comment: FC<Props> = ({ comment }) => {
-  const [channel, setChannel] = useState<Partial<Channel>>({});
+  const [channel, setChannel] = useState<Partial<UserChannel>>({});
 
   useEffect(() => {
     const fetchComment = async () => {

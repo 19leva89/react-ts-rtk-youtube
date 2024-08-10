@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import { Channel, Video } from "../types";
+import { UserChannel, Video } from "../types";
 import CreationDate from "./CreationDate";
 import styled from "styled-components";
 
@@ -61,7 +61,7 @@ type Props = {
 };
 
 const Card: FC<Props> = ({ type, video }) => {
-  const [channel, setChannel] = useState<Partial<Channel>>({});
+  const [channel, setChannel] = useState<Partial<UserChannel>>({});
 
   useEffect(() => {
     const fetchChannel = async () => {
