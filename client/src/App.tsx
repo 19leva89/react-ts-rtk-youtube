@@ -12,7 +12,7 @@ import Search from "./pages/Search";
 import Menu from "./components/Menu";
 import Navbar from "./components/Navbar";
 
-import { darkTheme, lightTheme } from "./utils/rheme";
+import { darkTheme, lightTheme } from "./utils/theme";
 import styled, { ThemeProvider } from "styled-components";
 
 const Container = styled.div`
