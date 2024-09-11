@@ -1,6 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 import { RootState } from "../redux/store";
 import { UserComment } from "../types";
@@ -44,7 +46,7 @@ const Comments: FC<Props> = ({ videoId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`/comments/${videoId}`);
+        const res = await axios.get(`${BASE_URL}/api/comments/${videoId}`);
         setComments(res.data);
       } catch (err) {}
     };

@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from "react";
+
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 import { UserChannel, UserComment } from "../types";
 import styled from "styled-components";
@@ -48,7 +50,7 @@ const Comment: FC<Props> = ({ comment }) => {
 
   useEffect(() => {
     const fetchComment = async () => {
-      const res = await axios.get(`/users/find/${comment.userId}`);
+      const res = await axios.get(`${BASE_URL}/api/users/find/${comment.userId}`);
 
       setChannel(res.data);
     };

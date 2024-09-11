@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 import { Video } from "../types";
 import styled from "styled-components";
@@ -16,7 +18,7 @@ const Home = ({ type }: { type: string }) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`/videos/${type}`);
+      const res = await axios.get(`${BASE_URL}/api/videos/${type}`);
       setVideos(res.data);
     };
 

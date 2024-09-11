@@ -19,6 +19,7 @@ import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutlined";
+import { BASE_URL } from "../utils/constants";
 
 const Container = styled.div`
   display: flex;
@@ -132,8 +133,8 @@ const Video = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const videoRes = await axios.get(`/videos/find/${path}`);
-        const channelRes = await axios.get(`/users/find/${videoRes.data.userId}`);
+        const videoRes = await axios.get(`${BASE_URL}/api/videos/find/${path}`);
+        const channelRes = await axios.get(`${BASE_URL}/api/users/find/${videoRes.data.userId}`);
 
         setChannel(channelRes.data);
         dispatch(fetchSuccess(videoRes.data));
@@ -144,7 +145,7 @@ const Video = () => {
 
   const handleLike = async () => {
     if (currentUser && currentUser._id && currentVideo && currentVideo._id) {
-      await axios.put(`/users/like/${currentVideo._id}`);
+      await axios.put(`${BASE_URL}/api/users/like/${currentVideo._id}`);
       dispatch(like(currentUser._id));
     } else {
       console.error("User or Video ID is missing.");
@@ -153,7 +154,7 @@ const Video = () => {
 
   const handleDislike = async () => {
     if (currentUser && currentUser._id && currentVideo && currentVideo._id) {
-      await axios.put(`/users/dislike/${currentVideo._id}`);
+      await axios.put(`${BASE_URL}/api/users/dislike/${currentVideo._id}`);
       dispatch(dislike(currentUser._id));
     } else {
       console.error("User or Video ID is missing.");
@@ -164,9 +165,9 @@ const Video = () => {
     if (!channel || !currentUser || !channel._id) return;
     try {
       if (currentUser?.subscribedUsers?.includes(channel._id)) {
-        await axios.put(`/users/unsub/${channel._id}`);
+        await axios.put(`${BASE_URL}/api/users/unsub/${channel._id}`);
       } else {
-        await axios.put(`/users/sub/${channel._id}`);
+        await axios.put(`${BASE_URL}/api/users/sub/${channel._id}`);
       }
       dispatch(subscription(channel._id));
     } catch (err) {

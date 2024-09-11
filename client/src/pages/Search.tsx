@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 import { Video } from "../types";
 import Card from "../components/Card";
@@ -18,7 +20,7 @@ const Search = () => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`/videos/search${query}`);
+      const res = await axios.get(`${BASE_URL}/api/videos/search${query}`);
       setVideos(res.data);
     };
     fetchVideos();

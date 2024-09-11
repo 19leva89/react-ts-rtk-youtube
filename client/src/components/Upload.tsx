@@ -2,6 +2,8 @@ import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+
 import app from "../firebase";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
@@ -142,6 +144,13 @@ const Upload: FC<Props> = ({ setOpen }) => {
     );
   };
 
+  const handleUpload = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const res = await axios.post(`${BASE_URL}/api/videos`, { ...inputs, tags });
+    setOpen(false);
+    res.status === 200 && navigate(`/video/${res.data._id}`);
+  };
+
   useEffect(() => {
     video && uploadFile(video, "videoUrl");
   }, [video]);
@@ -149,13 +158,6 @@ const Upload: FC<Props> = ({ setOpen }) => {
   useEffect(() => {
     img && uploadFile(img, "imgUrl");
   }, [img]);
-
-  const handleUpload = async (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const res = await axios.post("/videos", { ...inputs, tags });
-    setOpen(false);
-    res.status === 200 && navigate(`/video/${res.data._id}`);
-  };
 
   return (
     <Container>

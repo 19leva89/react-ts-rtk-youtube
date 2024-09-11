@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from "react";
+
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 import { Video } from "../types";
 import styled from "styled-components";
@@ -18,7 +20,7 @@ const Recommendation: FC<Props> = ({ tags }) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`/videos/tags?tags=${tags}`);
+      const res = await axios.get(`${BASE_URL}/api/videos/tags?tags=${tags}`);
       setVideos(res.data);
     };
     fetchVideos();

@@ -1,6 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 import { UserChannel, Video } from "../types";
 import CreationDate from "./CreationDate";
@@ -65,7 +67,7 @@ const Card: FC<Props> = ({ type, video }) => {
 
   useEffect(() => {
     const fetchChannel = async () => {
-      const res = await axios.get(`/users/find/${video.userId}`);
+      const res = await axios.get(`${BASE_URL}/api/users/find/${video.userId}`);
       setChannel(res.data);
     };
     fetchChannel();

@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { loginFailure, loginStart, loginSuccess } from "../redux/userSlice";
 
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+
 import { auth, provider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 
@@ -84,7 +86,7 @@ const SignIn = () => {
     dispatch(loginStart());
 
     try {
-      const res = await axios.post("/auth/signin", { name, password });
+      const res = await axios.post(`${BASE_URL}/api/auth/signin`, { name, password });
 
       dispatch(loginSuccess(res.data));
 
@@ -100,7 +102,7 @@ const SignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         axios
-          .post("/auth/google", {
+          .post(`${BASE_URL}/api/auth/google`, {
             name: result.user.displayName,
             email: result.user.email,
             img: result.user.photoURL,
@@ -116,12 +118,13 @@ const SignIn = () => {
       });
   };
 
-  //TODO: REGISTER FUNCTIONALITY
+  // TODO: REGISTER FUNCTIONALITY
 
   return (
     <Container>
       <Wrapper>
         <Title>Sign in</Title>
+
         <SubTitle>to continue to DimaTube</SubTitle>
 
         <form onSubmit={handleLogin}>
